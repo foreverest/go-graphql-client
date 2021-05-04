@@ -212,7 +212,9 @@ func (sc *SubscriptionClient) init() error {
 		var conn WebsocketConn
 		// allow custom websocket client
 		if sc.conn == nil {
-			conn, err = newWebsocketConn(sc)
+			// TODO: upstream this change
+			// https://github.com/hasura/go-graphql-client/pull/9
+			conn, err = sc.createConn(sc)
 			if err == nil {
 				sc.conn = conn
 			}
